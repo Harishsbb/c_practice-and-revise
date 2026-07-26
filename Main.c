@@ -1,6 +1,8 @@
 # include <stdio.h>
+#include <stdlib.h>
 
 
+// stuct use for store all data type in one please we can use this datatype so many times 
 struct Student {
     int id;
     char name[100];
@@ -53,8 +55,35 @@ void displayStudent(struct Student*s1){
 
 int main(){
     struct Student s1;
-    addStudent(&s1);
-    displayStudent(&s1);
+    int choice;
+    do{
+        
+        printf("===== STUDENT MANAGEMENT =====\n");
+        printf("1. Add Student\n");
+        printf("2. Display Students\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        
+        scanf("%d",&choice);
+        switch(choice){
+            case 1:
+            addStudent(&s1);
+            break;
+            
+            case 2:
+            displayStudent(&s1);
+            break;
+            
+            case 3:
+            printf("Exiting...\n");
+            break;
+        
+            default:
+            printf("Invalid choice\n");
+        
+        }
+}while(choice != 3);
+    
 
     return 0;
 }
