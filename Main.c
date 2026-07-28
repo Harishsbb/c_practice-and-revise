@@ -160,6 +160,25 @@ void Delete_Student(struct Student *s1, int *count)
     }
 }
 
+void Sort_Students(struct Student *s1, int count)
+{
+    struct Student temp;
+
+    for(int i = 0; i < count - 1; i++)
+    {
+        for(int j = 0; j < count - i - 1; j++)
+        {
+            if(s1[j].id > s1[j + 1].id)
+            {
+                temp = s1[j];
+                s1[j] = s1[j + 1];
+                s1[j + 1] = temp;
+            }
+        }
+    }
+
+    printf("Students sorted successfully!\n");
+}
 int main()
 {
     struct Student students[100];
@@ -173,7 +192,8 @@ int main()
         printf("3.Search student:\n");
         printf("4.Update Student:\n");
         printf("5.Delete Student:\n");
-        printf("6. Exit\n");
+        printf("6.Sort_Students:\n");
+        printf("7. Exit\n");
         printf("Enter your choice: ");
 
         scanf("%d", &choice);
@@ -238,15 +258,25 @@ int main()
                 Delete_Student(students, &count);
             }
             break;
-
         case 6:
+            if(count == 0)
+            {
+                printf("No students available.\n");
+            }
+            else
+            {
+                Sort_Students(students, count);
+            }
+            break;
+
+        case 7:
             printf("Exiting...\n");
             break;
 
         default:
             printf("Invalid choice\n");
         }
-    } while (choice != 6);
+    } while (choice != 7);
 
     return 0;
 }
