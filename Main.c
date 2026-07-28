@@ -81,6 +81,52 @@ void search_student(struct Student *s1, int count)
     printf("Student not found!\n");
 }
 }
+
+void Update_Student(struct Student *s1, int count){
+            int id;
+            int found =0;
+            float total =0.0f;
+
+            printf("Enter student id to update : ");
+            scanf("%d",&id);
+
+            for(int i = 0; i < count; i++)
+            {
+                if(s1[i].id == id)
+                {
+                    found =1;
+
+                    printf("Enter New Name :");
+                    scanf("%99s",s1[i].name);
+
+                    printf("Enter New Age: ");
+                    scanf("%d", &s1[i].age);
+
+                    total = 0.0f;
+
+                    for(int j = 0; j < 5; j++)
+                      {
+                    printf("Enter New Mark %d: ", j + 1);
+                    scanf("%f", &s1[i].mark[j]);
+
+                    total += s1[i].mark[j];
+                     }
+
+                        s1[i].total = total;
+                        s1[i].average = total / 5;
+
+                        printf("Student updated successfully!\n");
+                        break;
+                    }
+                }
+                        if(found == 0)
+                        {
+                            printf("Student not found!\n");
+                        }
+                }
+            
+
+
 int main()
 {
     struct Student students[100];
@@ -92,7 +138,8 @@ int main()
         printf("1. Add Student\n");
         printf("2. Display Students\n");
         printf("3.Search student:\n");
-        printf("4. Exit\n");
+        printf("4.Update Student:\n");
+        printf("5. Exit\n");
         printf("Enter your choice: ");
 
         scanf("%d", &choice);
@@ -135,15 +182,26 @@ int main()
             search_student(students, count);
         }
         break;
-            
+
         case 4:
+            if(count == 0)
+            {
+                printf("No students available.\n");
+            }
+            else
+            {
+                Update_Student(students, count);
+            }
+            break;
+
+        case 5:
             printf("Exiting...\n");
             break;
 
         default:
             printf("Invalid choice\n");
         }
-    } while (choice != 4);
+    } while (choice != 5);
 
     return 0;
 }
