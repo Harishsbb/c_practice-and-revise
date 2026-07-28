@@ -125,7 +125,40 @@ void Update_Student(struct Student *s1, int count){
                         }
                 }
             
+void Delete_Student(struct Student *s1, int *count)
+{
+    int id;
+    int found = 0;
 
+    printf("Enter Student ID to delete: ");
+    scanf("%d", &id);
+
+    for(int i = 0; i < *count; i++)
+    {
+        if(s1[i].id == id)
+        {
+            // Shift students left
+            for(int j = i; j < *count - 1; j++)
+            {
+                s1[j] = s1[j + 1];
+            }
+            // Decrease count
+            (*count)--;
+
+            // found = 1;
+                found =1;
+            // print success
+                printf("Account successfully deleted");
+            // break;
+            break;
+        }
+    }
+
+    if(found == 0)
+    {
+        printf("Student not found!\n");
+    }
+}
 
 int main()
 {
@@ -139,7 +172,8 @@ int main()
         printf("2. Display Students\n");
         printf("3.Search student:\n");
         printf("4.Update Student:\n");
-        printf("5. Exit\n");
+        printf("5.Delete Student:\n");
+        printf("6. Exit\n");
         printf("Enter your choice: ");
 
         scanf("%d", &choice);
@@ -195,13 +229,24 @@ int main()
             break;
 
         case 5:
+            if(count == 0)
+            {
+                printf("No students available.\n");
+            }
+            else
+            {
+                Delete_Student(students, &count);
+            }
+            break;
+
+        case 6:
             printf("Exiting...\n");
             break;
 
         default:
             printf("Invalid choice\n");
         }
-    } while (choice != 5);
+    } while (choice != 6);
 
     return 0;
 }
